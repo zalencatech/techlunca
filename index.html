@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">TECHLYNX OVERDRIVE — Systems That Perform</title>
+<meta id="pageDesc" name="description" content="Techlynx Overdrive helps businesses turn ideas into strong brands and traffic into real sales — through AI automation, AI agents, chatbots, web and mobile development.">
+<link id="faviconLink" rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230a0a0c'/%3E%3Ctext x='50' y='66' font-family='Arial' font-weight='900' font-size='54' fill='%23c9cbd1' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#07080a;
+    --charcoal:#111216;
+    --panel:#17181d;
+    --panel-2:#1d1f25;
+    --line:rgba(255,255,255,.09);
+    --line-strong:rgba(255,255,255,.18);
+    --silver-100:#f3f4f6;
+    --silver-300:#cfd1d7;
+    --silver-500:#9a9ca4;
+    --silver-700:#65666d;
+    --silver-900:#3a3b40;
+    --glow: linear-gradient(120deg,#7d7f86 0%,#f3f4f6 25%,#9a9ca4 45%,#f3f4f6 65%,#7d7f86 100%);
+    --radius:2px;
+    --ease:cubic-bezier(.16,.84,.32,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--black);
+    color:var(--silver-300);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:'';
+    position:fixed;inset:0;
+    background:
+      radial-gradient(ellipse 800px 500px at 15% -5%, rgba(255,255,255,.05), transparent 60%),
+      radial-gradient(ellipse 900px 600px at 110% 20%, rgba(255,255,255,.035), transparent 60%);
+    pointer-events:none;
+    z-index:0;
+  }
+  h1,h2,h3,h4{font-family:'Syne',sans-serif;color:var(--silver-100);font-weight:700;letter-spacing:-.01em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  section{position:relative;z-index:1;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--silver-500);
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{content:'';width:22px;height:1px;background:var(--silver-700);}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:15px 30px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+    border:1px solid var(--line-strong);
+    background:transparent;color:var(--silver-100);
+    cursor:pointer;
+    transition:.35s var(--ease);
+    white-space:nowrap;
+  }
+  .btn-solid{
+    background:var(--glow);
+    background-size:220% 100%;
+    color:#0a0a0c;
+    border:1px solid transparent;
+    font-weight:600;
+  }
+  .btn-solid:hover{background-position:100% 0;box-shadow:0 0 30px rgba(255,255,255,.18);}
+  .btn:not(.btn-solid):hover{border-color:var(--silver-100);background:rgba(255,255,255,.04);}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* NAV */
+  #siteNav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 32px;
+    background:rgba(7,8,10,.7);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+    transition:.3s;
+  }
+  .logo-wrap{display:flex;align-items:center;gap:10px;}
+  #logoImg{height:36px;display:none;}
+  .logo-text{font-family:'Syne',sans-serif;font-size:19px;font-weight:800;letter-spacing:.01em;color:var(--silver-100);}
+  .logo-text em{font-style:normal;color:var(--silver-500);font-weight:600;}
+  .nav-links{display:flex;gap:34px;align-items:center;}
+  .nav-links a{font-size:13px;font-family:'JetBrains Mono',monospace;letter-spacing:.05em;color:var(--silver-500);transition:.25s;text-transform:uppercase;}
+  .nav-links a:hover{color:var(--silver-100);}
+  .nav-cta{display:flex;align-items:center;gap:18px;}
+  #menuToggle{display:none;background:none;border:none;color:var(--silver-100);font-size:24px;cursor:pointer;}
+
+  /* HERO */
+  #hero{min-height:100vh;display:flex;align-items:center;padding:140px 0 80px;position:relative;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;}
+  #hero h1{font-size:clamp(42px,6vw,74px);line-height:1.02;text-transform:uppercase;}
+  .shine{
+    background:var(--glow);
+    background-size:250% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shine 7s linear infinite;
+  }
+  @keyframes shine{0%{background-position:0% 0;}100%{background-position:250% 0;}}
+  .hero-sub{margin:26px 0 36px;font-size:17px;color:var(--silver-500);max-width:520px;}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:52px;}
+  .flow-strip{display:flex;align-items:center;gap:0;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--silver-700);flex-wrap:wrap;}
+  .flow-strip .node{padding:8px 14px;border:1px solid var(--line);color:var(--silver-500);position:relative;}
+  .flow-strip .arrow{padding:0 6px;color:var(--silver-900);}
+  .flow-strip .node.active{color:var(--silver-100);border-color:var(--silver-100);overflow:hidden;}
+  .flow-strip .node.active::after{
+    content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+    animation:sweep 3.2s ease-in-out infinite;
+  }
+  @keyframes sweep{0%{left:-100%;}60%{left:120%;}100%{left:120%;}}
+
+  .gauge-panel{
+    border:1px solid var(--line);
+    background:linear-gradient(180deg,var(--panel),var(--charcoal));
+    padding:34px;position:relative;
+  }
+  .gauge-panel::before{content:'';position:absolute;top:0;left:0;width:100%;height:1px;background:var(--glow);opacity:.5;}
+  .gauge-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--silver-500);}
+  .dot{width:7px;height:7px;border-radius:50%;background:#7ee787;box-shadow:0 0 8px #7ee787;display:inline-block;margin-right:6px;}
+  .gauge-stats{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .gauge-stat{border-top:1px solid var(--line);padding-top:14px;}
+  .gauge-stat .num{font-family:'Syne',sans-serif;font-size:34px;font-weight:800;color:var(--silver-100);}
+  .gauge-stat .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--silver-500);text-transform:uppercase;margin-top:4px;}
+
+  /* SECTION HEAD */
+  .sec-head{max-width:640px;margin-bottom:64px;}
+  .sec-head h2{font-size:clamp(30px,4vw,44px);text-transform:uppercase;line-height:1.08;}
+  .sec-head p{margin-top:18px;color:var(--silver-500);font-size:16px;}
+  .section-pad{padding:120px 0;}
+  .divider{height:1px;background:var(--line);}
+
+  /* ABOUT */
+  #about .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start;}
+  #about .about-text p{margin-bottom:20px;color:var(--silver-500);font-size:16.5px;}
+  .about-features{display:grid;gap:0;}
+  .feat-row{display:flex;gap:20px;padding:26px 0;border-top:1px solid var(--line);}
+  .feat-row:last-child{border-bottom:1px solid var(--line);}
+  .feat-icon{font-size:22px;width:44px;height:44px;border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .feat-row h4{font-size:16px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.02em;}
+  .feat-row p{color:var(--silver-500);font-size:14.5px;}
+
+  /* SERVICES */
+  .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .service-card{background:var(--black);padding:36px 30px;transition:.35s var(--ease);position:relative;}
+  .service-card:hover{background:var(--panel);}
+  .service-index{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--silver-700);margin-bottom:26px;}
+  .service-icon{font-size:26px;margin-bottom:18px;}
+  .service-card h3{font-size:18px;margin-bottom:10px;text-transform:uppercase;letter-spacing:.01em;}
+  .service-card p{font-size:14px;color:var(--silver-500);}
+
+  /* WHY US */
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;}
+  .why-item .why-num{font-family:'JetBrains Mono',monospace;color:var(--silver-700);font-size:13px;margin-bottom:16px;}
+  .why-item h4{font-size:17px;margin-bottom:10px;text-transform:uppercase;}
+  .why-item p{color:var(--silver-500);font-size:14.5px;}
+
+  /* CEO */
+  #ceo .ceo-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:center;background:linear-gradient(180deg,var(--panel),var(--charcoal));border:1px solid var(--line);padding:60px;}
+  .ceo-photo{aspect-ratio:3/4;border:1px solid var(--line-strong);background:var(--panel-2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--silver-700);position:relative;overflow:hidden;}
+  .ceo-photo .ph-icon{font-size:52px;}
+  .ceo-photo .ph-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;}
+  .ceo-quote{font-family:'Syne',sans-serif;font-size:22px;color:var(--silver-100);line-height:1.4;margin-bottom:24px;}
+  .ceo-name{font-size:24px;color:var(--silver-100);margin-bottom:4px;}
+  .ceo-role{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--silver-500);text-transform:uppercase;letter-spacing:.08em;margin-bottom:22px;}
+  .ceo-bio p{color:var(--silver-500);margin-bottom:14px;font-size:15px;}
+  .ceo-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+  .ceo-tags span{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;border:1px solid var(--line-strong);padding:6px 12px;color:var(--silver-500);}
+
+  /* TEAM */
+  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .team-card{background:var(--black);padding:34px;text-align:left;}
+  .team-avatar{width:56px;height:56px;border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;color:var(--silver-500);margin-bottom:18px;}
+  .team-card h4{font-size:16px;text-transform:uppercase;margin-bottom:4px;}
+  .team-role{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--silver-500);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;}
+  .team-card p{font-size:14px;color:var(--silver-500);}
+
+  /* PORTFOLIO */
+  .filter-row{display:flex;gap:12px;margin-bottom:44px;flex-wrap:wrap;}
+  .filter-btn{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:9px 18px;border:1px solid var(--line);color:var(--silver-500);cursor:pointer;background:transparent;transition:.25s;}
+  .filter-btn.active,.filter-btn:hover{border-color:var(--silver-100);color:var(--silver-100);}
+  .port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .port-card{background:var(--black);padding:0;overflow:hidden;}
+  .port-media{aspect-ratio:4/3;background:var(--panel-2);display:flex;align-items:center;justify-content:center;color:var(--silver-700);font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--line);}
+  .port-body{padding:24px;}
+  .port-tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--silver-700);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;}
+  .port-body h4{font-size:16px;margin-bottom:8px;text-transform:uppercase;}
+  .port-body p{font-size:13.5px;color:var(--silver-500);}
+
+  /* TESTIMONIALS */
+  .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .test-card{background:var(--black);padding:32px;}
+  .stars{color:var(--silver-100);font-size:13px;letter-spacing:2px;margin-bottom:18px;}
+  .test-card p.quote{font-size:14.5px;color:var(--silver-300);margin-bottom:24px;min-height:100px;}
+  .test-who{display:flex;align-items:center;gap:12px;}
+  .test-avatar{width:38px;height:38px;border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--silver-500);}
+  .test-name{font-size:13.5px;color:var(--silver-100);}
+  .test-role{font-size:12px;color:var(--silver-700);font-family:'JetBrains Mono',monospace;}
+
+  /* PROCESS */
+  .process-list{display:flex;flex-direction:column;}
+  .proc-row{display:grid;grid-template-columns:100px 1fr;gap:30px;padding:34px 0;border-top:1px solid var(--line);align-items:baseline;}
+  .process-list .proc-row:last-child{border-bottom:1px solid var(--line);}
+  .proc-num{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--silver-700);}
+  .proc-row h4{font-size:20px;text-transform:uppercase;margin-bottom:8px;}
+  .proc-row p{color:var(--silver-500);font-size:15px;max-width:600px;}
+
+  /* PRICING */
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .price-card{border:1px solid var(--line);padding:38px 30px;background:var(--panel);display:flex;flex-direction:column;}
+  .price-card.popular{border-color:var(--silver-100);background:var(--panel-2);position:relative;}
+  .popular-tag{position:absolute;top:-13px;left:30px;background:var(--silver-100);color:#0a0a0c;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;font-weight:600;}
+  .price-name{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--silver-500);margin-bottom:14px;}
+  .price-amt{font-family:'Syne',sans-serif;font-size:32px;color:var(--silver-100);margin-bottom:16px;}
+  .price-amt span{font-size:13px;color:var(--silver-700);font-family:'JetBrains Mono',monospace;}
+  .price-desc{font-size:14px;color:var(--silver-500);margin-bottom:26px;min-height:60px;}
+  .price-feats{list-style:none;margin-bottom:30px;flex:1;}
+  .price-feats li{font-size:13.5px;color:var(--silver-300);padding:9px 0;border-top:1px solid var(--line);display:flex;gap:10px;}
+  .price-feats li:before{content:'—';color:var(--silver-700);}
+
+  /* FAQ */
+  .faq-item{border-top:1px solid var(--line);}
+  .faq-list{border-bottom:1px solid var(--line);}
+  .faq-q{display:flex;justify-content:space-between;align-items:center;padding:26px 0;cursor:pointer;font-size:16px;color:var(--silver-100);font-family:'Syne',sans-serif;font-weight:700;}
+  .faq-q .plus{font-family:'JetBrains Mono',monospace;color:var(--silver-500);font-size:18px;transition:.3s;}
+  .faq-item.open .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .4s var(--ease);}
+  .faq-a p{padding-bottom:24px;color:var(--silver-500);font-size:14.5px;max-width:700px;}
+
+  /* CONTACT */
+  #contact .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;}
+  .contact-info-row{display:flex;gap:18px;padding:22px 0;border-top:1px solid var(--line);}
+  .contact-info-row:last-child{border-bottom:1px solid var(--line);}
+  .ci-icon{font-size:18px;width:38px;}
+  .ci-label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--silver-700);margin-bottom:4px;}
+  .ci-val{color:var(--silver-100);font-size:15px;}
+  form .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+  .field{display:flex;flex-direction:column;gap:8px;}
+  .field label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--silver-700);}
+  .field input,.field textarea,.field select{
+    background:var(--panel);border:1px solid var(--line);color:var(--silver-100);
+    padding:13px 14px;font-family:'Inter',sans-serif;font-size:14px;outline:none;
+  }
+  .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--silver-300);}
+  .field textarea{min-height:120px;resize:vertical;}
+  #contactForm{margin-top:2px;}
+  #formMsg{margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#7ee787;display:none;}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:70px 0 30px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:50px;margin-bottom:60px;}
+  footer p{color:var(--silver-700);font-size:14px;margin-top:16px;max-width:320px;}
+  .foot-col h5{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--silver-500);margin-bottom:20px;}
+  .foot-col a{display:block;color:var(--silver-500);font-size:14px;padding:6px 0;transition:.2s;}
+  .foot-col a:hover{color:var(--silver-100);}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:26px;border-top:1px solid var(--line);font-size:12.5px;color:var(--silver-700);font-family:'JetBrains Mono',monospace;flex-wrap:wrap;gap:12px;}
+  .foot-bottom a{color:var(--silver-700);}
+  .foot-bottom a:hover{color:var(--silver-100);}
+
+  /* MOBILE */
+  @media(max-width:980px){
+    .hero-grid,#about .about-grid,#ceo .ceo-wrap,#contact .contact-grid{grid-template-columns:1fr;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .why-grid{grid-template-columns:repeat(2,1fr);}
+    .team-grid,.port-grid,.test-grid,.price-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;gap:34px;}
+    .nav-links{position:fixed;top:73px;left:0;right:0;bottom:0;background:var(--black);flex-direction:column;justify-content:flex-start;padding:40px 32px;gap:26px;transform:translateX(100%);transition:.4s var(--ease);}
+    .nav-links.open{transform:translateX(0);}
+    #menuToggle{display:block;}
+    .nav-cta .btn:not(#menuToggle){display:none;}
+  }
+  @media(max-width:640px){
+    .wrap{padding:0 20px;}
+    .section-pad{padding:80px 0;}
+    form .form-row{grid-template-columns:1fr;}
+    #ceo .ceo-wrap{padding:34px 24px;}
+  }
+
+  /* ===================== ADMIN PANEL ===================== */
+  #adminRoot{display:none;min-height:100vh;background:var(--black);}
+  #adminRoot.show{display:block;}
+  #siteRoot.hide{display:none;}
+
+  #adminLogin{min-height:100vh;display:flex;align-items:center;justify-content:center;}
+  .login-box{width:380px;border:1px solid var(--line);background:var(--panel);padding:44px 36px;text-align:center;}
+  .login-box .logo-text{display:block;margin-bottom:8px;font-size:22px;}
+  .login-box .eyebrow{justify-content:center;margin:6px 0 30px;}
+  .login-box .eyebrow::before{display:none;}
+  .login-box input{width:100%;background:var(--charcoal);border:1px solid var(--line);color:var(--silver-100);padding:13px 14px;margin-bottom:14px;font-family:'JetBrains Mono',monospace;font-size:14px;outline:none;}
+  .login-box input:focus{border-color:var(--silver-300);}
+  .login-box .btn{width:100%;justify-content:center;margin-top:6px;}
+  .login-err{color:#ff8080;font-size:12.5px;font-family:'JetBrains Mono',monospace;margin-top:12px;display:none;}
+  .login-hint{margin-top:22px;font-size:11.5px;color:var(--silver-700);font-family:'JetBrains Mono',monospace;line-height:1.6;}
+
+  .admin-shell{display:grid;grid-template-columns:250px 1fr;min-height:100vh;}
+  .admin-side{border-right:1px solid var(--line);background:var(--panel);padding:26px 0;display:flex;flex-direction:column;}
+  .admin-side .logo-text{padding:0 24px 24px;display:block;border-bottom:1px solid var(--line);margin-bottom:14px;font-size:16px;}
+  .admin-nav{flex:1;overflow-y:auto;}
+  .admin-nav button{
+    display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+    background:none;border:none;color:var(--silver-500);padding:13px 24px;
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;
+    cursor:pointer;border-left:2px solid transparent;
+  }
+  .admin-nav button:hover{color:var(--silver-100);background:rgba(255,255,255,.03);}
+  .admin-nav button.active{color:var(--silver-100);border-left-color:var(--silver-100);background:rgba(255,255,255,.04);}
+  .admin-logout{margin:14px 24px 0;}
+  .admin-main{padding:40px 46px;overflow-y:auto;max-height:100vh;}
+  .admin-panel{display:none;}
+  .admin-panel.active{display:block;max-width:820px;}
+  .admin-panel h2{font-size:24px;text-transform:uppercase;margin-bottom:6px;}
+  .admin-panel .sub{color:var(--silver-500);font-size:13.5px;margin-bottom:34px;}
+  .a-field{margin-bottom:20px;}
+  .a-field label{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--silver-500);margin-bottom:8px;}
+  .a-field input[type=text],.a-field input[type=email],.a-field input[type=tel],.a-field input[type=number],.a-field textarea,.a-field select{
+    width:100%;background:var(--panel-2);border:1px solid var(--line);color:var(--silver-100);
+    padding:12px 14px;font-family:'Inter',sans-serif;font-size:14px;outline:none;
+  }
+  .a-field textarea{min-height:90px;resize:vertical;font-family:'Inter',sans-serif;}
+  .a-field input:focus,.a-field textarea:focus,.a-field select:focus{border-color:var(--silver-300);}
+  .a-hint{font-size:11.5px;color:var(--silver-700);margin-top:6px;font-family:'JetBrains Mono',monospace;}
+  .a-row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .a-card{border:1px solid var(--line);background:var(--panel);padding:22px;margin-bottom:16px;}
+  .a-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .a-card-head strong{color:var(--silver-100);font-size:13.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;letter-spacing:.03em;}
+  .a-mini-btn{background:none;border:1px solid var(--line);color:var(--silver-500);font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;padding:6px 12px;cursor:pointer;}
+  .a-mini-btn:hover{border-color:var(--silver-100);color:var(--silver-100);}
+  .a-mini-btn.danger:hover{border-color:#ff8080;color:#ff8080;}
+  .a-save-row{display:flex;align-items:center;gap:16px;margin-top:26px;}
+  .a-saved-msg{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#7ee787;opacity:0;transition:.3s;}
+  .a-saved-msg.show{opacity:1;}
+  .a-upload{
+    border:1px dashed var(--line-strong);padding:22px;text-align:center;cursor:pointer;color:var(--silver-500);
+    font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.05em;
+    display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:14px;
+  }
+  .a-upload:hover{border-color:var(--silver-100);color:var(--silver-100);}
+  .a-upload img{max-height:70px;margin-bottom:6px;}
+  .a-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:36px;}
+  .a-stat{border:1px solid var(--line);background:var(--panel);padding:20px;}
+  .a-stat .n{font-family:'Syne',sans-serif;font-size:26px;color:var(--silver-100);}
+  .a-stat .l{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--silver-500);text-transform:uppercase;margin-top:4px;}
+  .a-add{display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--line-strong);color:var(--silver-100);font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;padding:11px 18px;cursor:pointer;margin-bottom:20px;}
+  .a-add:hover{background:rgba(255,255,255,.05);}
+  @media(max-width:900px){
+    .admin-shell{grid-template-columns:1fr;}
+    .admin-side{position:fixed;left:0;top:0;bottom:0;width:220px;z-index:50;transform:translateX(-100%);transition:.3s;}
+    .admin-side.open{transform:translateX(0);}
+    .admin-main{padding:24px;}
+    .a-row2,.a-stats-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- =============================================================== -->
+<!-- PUBLIC SITE -->
+<!-- =============================================================== -->
+<div id="siteRoot">
+
+  <nav id="siteNav">
+    <a href="#hero" class="logo-wrap">
+      <img id="logoImg" alt="Techlynx Overdrive logo">
+      <span class="logo-text" id="logoText">TECHLYNX <em>OVERDRIVE</em></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#why">Why Us</a>
+      <a href="#work">Work</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-solid">Start a Project</a>
+      <button id="menuToggle" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">PAKISTAN-BASED · AI &amp; DIGITAL SYSTEMS STUDIO</div>
+        <h1><span class="shine" id="heroTitle">ENGINEERED<br>FOR OVERDRIVE.</span></h1>
+        <p class="hero-sub" id="heroSub">Techlynx Overdrive helps businesses turn ideas into strong brands and online traffic into real sales — while simplifying operations through smart digitalization and automation. From branding to automation, we build systems that perform.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-solid">Start Your Project →</a>
+          <a href="#work" class="btn">↗ View Our Work</a>
+        </div>
+        <div class="flow-strip">
+          <span class="node">IDEA</span><span class="arrow">→</span>
+          <span class="node active">BRAND</span><span class="arrow">→</span>
+          <span class="node">TRAFFIC</span><span class="arrow">→</span>
+          <span class="node">SALES</span>
+        </div>
+      </div>
+      <div class="gauge-panel reveal">
+        <div class="gauge-head"><span><span class="dot"></span>SYSTEM STATUS</span><span>LIVE</span></div>
+        <div class="gauge-stats">
+          <div class="gauge-stat"><div class="num" id="statProjects">50+</div><div class="lbl">Projects Delivered</div></div>
+          <div class="gauge-stat"><div class="num" id="statSatisfaction">98%</div><div class="lbl">Client Satisfaction</div></div>
+          <div class="gauge-stat"><div class="num" id="statAutomation">3.5x</div><div class="lbl">Avg. Efficiency Gain</div></div>
+          <div class="gauge-stat"><div class="num" id="statSupport">24/7</div><div class="lbl">Support Coverage</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider wrap"></div>
+
+  <!-- ABOUT -->
+  <section id="about" class="section-pad">
+    <div class="wrap about-grid">
+      <div class="about-text reveal">
+        <div class="eyebrow">ABOUT TECHLYNX OVERDRIVE</div>
+        <h2 style="font-size:clamp(28px,3.6vw,40px);text-transform:uppercase;margin-bottom:24px;">We Build The Systems<br>Behind The Growth.</h2>
+        <p id="aboutP1">Techlynx Overdrive is a digital growth and automation studio. We exist to help businesses turn raw ideas into brands people trust, and traffic into revenue that compounds.</p>
+        <p id="aboutP2">Where most agencies stop at design, we go further — engineering the AI automations, agents, and chatbots that run quietly in the background so your team can focus on what matters. Branding, websites, SEO, and mobile apps included, all under one roof.</p>
+      </div>
+      <div class="about-features reveal">
+        <div class="feat-row"><div class="feat-icon">⚡</div><div><h4>Automation-First</h4><p>We don't just design — we automate the workflows behind the brand, so growth doesn't cost you more hours.</p></div></div>
+        <div class="feat-row"><div class="feat-icon">🎯</div><div><h4>Built To Convert</h4><p>Every site, app and chatbot is engineered around one metric: does it move the business forward.</p></div></div>
+        <div class="feat-row"><div class="feat-icon">🔧</div><div><h4>Full-Stack Delivery</h4><p>Branding, engineering, and AI — handled by one team, so nothing gets lost in translation.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section-pad">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">WHAT WE DO</div>
+        <h2>Our Services</h2>
+        <p>A full-stack range of branding, engineering and AI services — built to move your business from idea to overdrive.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="services-grid reveal" id="servicesGrid"></div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="why" class="section-pad">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">WHY CHOOSE US</div>
+        <h2>The Overdrive Difference</h2>
+      </div>
+      <div class="why-grid reveal" id="whyGrid"></div>
+    </div>
+  </section>
+
+  <!-- CEO -->
+  <section id="ceo" class="section-pad">
+    <div class="wrap">
+      <div class="ceo-wrap reveal">
+        <div class="ceo-photo">
+          <div class="ph-icon">👤</div>
+          <div class="ph-label">CEO Photo Placeholder</div>
+        </div>
+        <div>
+          <div class="eyebrow">LEADERSHIP</div>
+          <p class="ceo-quote" id="ceoQuote">"Every business deserves systems that work as hard as they do — that's what we build."</p>
+          <div class="ceo-name" id="ceoName">Danyal Farooq</div>
+          <div class="ceo-role" id="ceoRole">Founder &amp; CEO, Techlynx Overdrive</div>
+          <div class="ceo-bio" id="ceoBio">
+            <p>Danyal Farooq is a seasoned businessman who has spent many years building and scaling ventures across branding, technology and digital growth. Over the course of his career, he has developed a sharp instinct for identifying where businesses lose momentum — and the systems required to fix it.</p>
+            <p>His approach to leadership is rooted in discipline and long-term thinking: build things properly, measure what matters, and never mistake activity for progress. That philosophy is the foundation Techlynx Overdrive was built on.</p>
+            <p>Under his direction, Techlynx Overdrive has grown into a full-stack studio helping businesses turn ideas into brands, and brands into revenue — powered by branding, engineering, and AI automation working in sync.</p>
+          </div>
+          <div class="ceo-tags">
+            <span>Business Strategist</span><span>Brand Builder</span><span>AI &amp; Automation Advocate</span><span>Growth-Focused Leader</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" class="section-pad">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">OUR TEAM</div>
+        <h2>The People Behind The Build</h2>
+      </div>
+      <div class="team-grid reveal" id="teamGrid"></div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="work" class="section-pad">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">SELECTED WORK</div>
+        <h2>Projects In Motion</h2>
+        <p>Placeholder case studies — swap in real client work any time from the admin panel.</p>
+      </div>
+      <div class="filter-row reveal">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Branding</button>
+        <button class="filter-btn">Web &amp; Apps</button>
+        <button class="filter-btn">AI &amp; Automation</button>
+      </div>
+      <div class="port-grid reveal" id="portGrid"></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="section-pad">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">CLIENT FEEDBACK</div>
+        <h2>What Clients Say</h2>
+      </div>
+      <div class="test-grid reveal" id="testGrid"></div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" class="section-pad">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">HOW WE WORK</div>
+        <h2>Our Process</h2>
+      </div>
+      <div class="process-list reveal" id="processList"></div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="section-pad">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">INVESTMENT</div>
+        <h2>Transparent Pricing</h2>
+        <p>Placeholder tiers — update pricing, features and names any time from the admin panel.</p>
+      </div>
+      <div class="price-grid reveal" id="priceGrid"></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section-pad">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">FAQ</div>
+        <h2>Common Questions</h2>
+      </div>
+      <div class="faq-list reveal" id="faqList"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section-pad">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <div class="eyebrow">GET IN TOUCH</div>
+        <h2 style="font-size:clamp(28px,3.6vw,38px);text-transform:uppercase;margin-bottom:20px;">Let's Build<br>Something That Performs.</h2>
+        <p style="color:var(--silver-500);margin-bottom:10px;max-width:420px;">Tell us about your business and where you want it to go — we'll get back to you within one business day.</p>
+        <div class="contact-info-row"><div class="ci-icon">📧</div><div><div class="ci-label">Email</div><div class="ci-val" id="contactEmail">hello@techlynxoverdrive.com</div></div></div>
+        <div class="contact-info-row"><div class="ci-icon">📱</div><div><div class="ci-label">Phone / WhatsApp</div><div class="ci-val" id="contactPhone">+92 300 0000000</div></div></div>
+        <div class="contact-info-row"><div class="ci-icon">📍</div><div><div class="ci-label">Location</div><div class="ci-val" id="contactLoc">Lahore, Pakistan · Remote Worldwide</div></div></div>
+        <div class="contact-info-row"><div class="ci-icon">🕐</div><div><div class="ci-label">Response Time</div><div class="ci-val" id="contactResp">Within 1 Business Day</div></div></div>
+      </div>
+      <div class="reveal">
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="field"><label>Your Name</label><input type="text" required placeholder="Full name"></div>
+            <div class="field"><label>Email Address</label><input type="email" required placeholder="you@company.com"></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label>Company</label><input type="text" placeholder="Company name"></div>
+            <div class="field"><label>Service Needed</label>
+              <select>
+                <option>AI Automation</option>
+                <option>AI Agent Development</option>
+                <option>AI Chatbot Development</option>
+                <option>Web App Development</option>
+                <option>Branding &amp; Visual Identity</option>
+                <option>SEO</option>
+                <option>Mobile App Development</option>
+                <option>Full-Service Package</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" style="margin-bottom:18px;"><label>Tell Us About Your Project</label><textarea placeholder="What are you looking to build?"></textarea></div>
+          <button type="submit" class="btn btn-solid" style="width:100%;justify-content:center;">Send Message →</button>
+          <div id="formMsg">✓ Message received — we'll be in touch within 1 business day.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <span class="logo-text">TECHLYNX <em>OVERDRIVE</em></span>
+          <p id="footAbout">We help businesses turn ideas into strong brands and traffic into real sales — through branding, engineering and AI automation, built to perform.</p>
+        </div>
+        <div class="foot-col">
+          <h5>Services</h5>
+          <a href="#services">AI Automation</a>
+          <a href="#services">AI Agents &amp; Chatbots</a>
+          <a href="#services">Web &amp; App Development</a>
+          <a href="#services">Branding &amp; SEO</a>
+        </div>
+        <div class="foot-col">
+          <h5>Company</h5>
+          <a href="#about">About Us</a>
+          <a href="#ceo">Leadership</a>
+          <a href="#work">Our Work</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© <span id="footYear">2026</span> Techlynx Overdrive. All rights reserved.</span>
+        <a href="#admin" id="adminLink" style="opacity:.5;">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- =============================================================== -->
+<!-- ADMIN PANEL -->
+<!-- =============================================================== -->
+<div id="adminRoot">
+
+  <div id="adminLogin">
+    <div class="login-box">
+      <span class="logo-text">TECHLYNX <em>OVERDRIVE</em></span>
+      <div class="eyebrow">ADMIN DASHBOARD</div>
+      <input type="text" id="adminUser" placeholder="Username" autocomplete="off">
+      <input type="password" id="adminPass" placeholder="Password" autocomplete="off">
+      <button class="btn btn-solid" id="loginBtn">Sign In</button>
+      <div class="login-err" id="loginErr">Invalid credentials. Try again.</div>
+      <div class="login-hint">Default login — username: <strong>admin</strong> · password: <strong>overdrive123</strong><br>Change this in the script before deploying publicly.</div>
+    </div>
+  </div>
+
+  <div class="admin-shell" id="adminShell" style="display:none;">
+    <aside class="admin-side">
+      <span class="logo-text">TECHLYNX <em>OVERDRIVE</em></span>
+      <nav class="admin-nav" id="adminNav">
+        <button data-panel="overview" class="active">📊 Overview</button>
+        <button data-panel="hero">🏠 Hero Section</button>
+        <button data-panel="about">ℹ️ About Section</button>
+        <button data-panel="services">⚙️ Services</button>
+        <button data-panel="why">🏆 Why Us</button>
+        <button data-panel="ceo">👤 CEO Section</button>
+        <button data-panel="team">👥 Team Members</button>
+        <button data-panel="portfolio">💼 Portfolio</button>
+        <button data-panel="testimonials">⭐ Testimonials</button>
+        <button data-panel="process">🔄 Process</button>
+        <button data-panel="pricing">💰 Pricing</button>
+        <button data-panel="faq">❓ FAQ</button>
+        <button data-panel="contact">📬 Contact Info</button>
+        <button data-panel="brand">🖼️ Logo &amp; Favicon</button>
+      </nav>
+      <div class="admin-logout"><button class="a-mini-btn danger" id="logoutBtn" style="width:100%;padding:11px;">Log Out</button></div>
+    </aside>
+
+    <main class="admin-main">
+
+      <!-- OVERVIEW -->
+      <div class="admin-panel active" data-panel="overview">
+        <h2>Overview</h2>
+        <div class="sub">Welcome to the Techlynx Overdrive admin panel. Edit any section from the sidebar — changes save instantly to this browser and reflect live on the site.</div>
+        <div class="a-stats-grid">
+          <div class="a-stat"><div class="n" id="ovProjects">50+</div><div class="l">Projects</div></div>
+          <div class="a-stat"><div class="n" id="ovSat">98%</div><div class="l">Satisfaction</div></div>
+          <div class="a-stat"><div class="n" id="ovServices">8</div><div class="l">Services Listed</div></div>
+          <div class="a-stat"><div class="n" id="ovTeam">3</div><div class="l">Team Members</div></div>
+        </div>
+        <div class="a-card">
+          <div class="a-card-head"><strong>Storage Notice</strong></div>
+          <p style="font-size:13.5px;color:var(--silver-500);">This admin panel saves content to this browser's local storage — there's no server or database. Edits made here won't sync across devices or visitors. For a shared, permanent content system, this site would need to be connected to a small backend or headless CMS later on.</p>
+        </div>
+      </div>
+
+      <!-- HERO -->
+      <div class="admin-panel" data-panel="hero">
+        <h2>Hero Section</h2>
+        <div class="sub">The first thing visitors see.</div>
+        <div class="a-field"><label>Headline (use \n for line break)</label><textarea id="f_heroTitle"></textarea></div>
+        <div class="a-field"><label>Subheadline</label><textarea id="f_heroSub"></textarea></div>
+        <div class="a-row2">
+          <div class="a-field"><label>Stat 1 — Value</label><input type="text" id="f_statProjects"></div>
+          <div class="a-field"><label>Stat 2 — Value</label><input type="text" id="f_statSatisfaction"></div>
+        </div>
+        <div class="a-row2">
+          <div class="a-field"><label>Stat 3 — Value</label><input type="text" id="f_statAutomation"></div>
+          <div class="a-field"><label>Stat 4 — Value</label><input type="text" id="f_statSupport"></div>
+        </div>
+        <div class="a-save-row"><button class="btn btn-solid" data-save="hero">Save Changes</button><span class="a-saved-msg" data-msg="hero">✓ Saved!</span></div>
+      </div>
+
+      <!-- ABOUT -->
+      <div class="admin-panel" data-panel="about">
+        <h2>About Section</h2>
+        <div class="a-field"><label>Paragraph 1</label><textarea id="f_aboutP1"></textarea></div>
+        <div class="a-field"><label>Paragraph 2</label><textarea id="f_aboutP2"></textarea></div>
+        <div class="a-save-row"><button class="btn btn-solid" data-save="about">Save Changes</button><span class="a-saved-msg" data-msg="about">✓ Saved!</span></div>
+      </div>
+
+      <!-- SERVICES -->
+      <div class="admin-panel" data-panel="services">
+        <h2>Services</h2>
+        <div class="sub">Add, edit or remove any service card.</div>
+        <button class="a-add" id="addService">+ Add Service</button>
+        <div id="servicesList"></div>
+      </div>
+
+      <!-- WHY -->
+      <div class="admin-panel" data-panel="why">
+        <h2>Why Us</h2>
+        <div class="sub">The four differentiators shown under "Why Choose Us".</div>
+        <div id="whyList"></div>
+      </div>
+
+      <!-- CEO -->
+      <div class="admin-panel" data-panel="ceo">
+        <h2>CEO Section</h2>
+        <div class="a-field"><label>Pull Quote</label><textarea id="f_ceoQuote"></textarea></div>
+        <div class="a-row2">
+          <div class="a-field"><label>Full Name</label><input type="text" id="f_ceoName"></div>
+          <div class="a-field"><label>Role / Title</label><input type="text" id="f_ceoRole"></div>
+        </div>
+        <div class="a-field"><label>Bio Paragraph 1</label><textarea id="f_ceoBio1"></textarea></div>
+        <div class="a-field"><label>Bio Paragraph 2</label><textarea id="f_ceoBio2"></textarea></div>
+        <div class="a-field"><label>Bio Paragraph 3</label><textarea id="f_ceoBio3"></textarea></div>
+        <div class="a-field"><label>Tags (comma separated)</label><input type="text" id="f_ceoTags"></div>
+        <div class="a-hint">Photo intentionally left as a placeholder — no CEO image is used on this site.</div>
+        <div class="a-save-row"><button class="btn btn-solid" data-save="ceo">Save Changes</button><span class="a-saved-msg" data-msg="ceo">✓ Saved!</span></div>
+      </div>
+
+      <!-- TEAM -->
+      <div class="admin-panel" data-panel="team">
+        <h2>Team Members</h2>
+        <button class="a-add" id="addTeam">+ Add Member</button>
+        <div id="teamList"></div>
+      </div>
+
+      <!-- PORTFOLIO -->
+      <div class="admin-panel" data-panel="portfolio">
+        <h2>Portfolio Projects</h2>
+        <button class="a-add" id="addProject">+ Add Project</button>
+        <div id="portList"></div>
+      </div>
+
+      <!-- TESTIMONIALS -->
+      <div class="admin-panel" data-panel="testimonials">
+        <h2>Testimonials</h2>
+        <button class="a-add" id="addTest">+ Add Testimonial</button>
+        <div id="testList"></div>
+      </div>
+
+      <!-- PROCESS -->
+      <div class="admin-panel" data-panel="process">
+        <h2>Process Steps</h2>
+        <div id="processFieldList"></div>
+        <div class="a-save-row"><button class="btn btn-solid" data-save="process">Save Changes</button><span class="a-saved-msg" data-msg="process">✓ Saved!</span></div>
+      </div>
+
+      <!-- PRICING -->
+      <div class="admin-panel" data-panel="pricing">
+        <h2>Pricing Plans</h2>
+        <button class="a-add" id="addPlan">+ Add Plan</button>
+        <div id="priceList"></div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="admin-panel" data-panel="faq">
+        <h2>FAQ</h2>
+        <button class="a-add" id="addFaq">+ Add Question</button>
+        <div id="faqEditList"></div>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="admin-panel" data-panel="contact">
+        <h2>Contact Information</h2>
+        <div class="a-field"><label>Email</label><input type="text" id="f_contactEmail"></div>
+        <div class="a-field"><label>Phone / WhatsApp</label><input type="text" id="f_contactPhone"></div>
+        <div class="a-field"><label>Location</label><input type="text" id="f_contactLoc"></div>
+        <div class="a-field"><label>Response Time</label><input type="text" id="f_contactResp"></div>
+        <div class="a-save-row"><button class="btn btn-solid" data-save="contact">Save Changes</button><span class="a-saved-msg" data-msg="contact">✓ Saved!</span></div>
+      </div>
+
+      <!-- BRAND -->
+      <div class="admin-panel" data-panel="brand">
+        <h2>Logo &amp; Favicon</h2>
+        <div class="sub">Upload PNG or SVG. Applies instantly across the whole site.</div>
+        <label class="a-hint" style="display:block;margin-bottom:8px;">SITE LOGO</label>
+        <div class="a-upload" id="logoUpload">
+          <img id="logoPreview" style="display:none;">
+          <span id="logoUploadText">🖼️ Click to upload logo (transparent PNG recommended)</span>
+        </div>
+        <input type="file" id="logoFile" accept="image/*" style="display:none;">
+        <button class="a-mini-btn" id="resetLogo">Reset to text logo</button>
+
+        <label class="a-hint" style="display:block;margin:26px 0 8px;">FAVICON</label>
+        <div class="a-upload" id="favUpload">
+          <img id="favPreview" style="display:none;">
+          <span id="favUploadText">🖼️ Click to upload favicon (square, 512×512px recommended)</span>
+        </div>
+        <input type="file" id="favFile" accept="image/*" style="display:none;">
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script>
+(function(){
+
+/* =========================================================
+   DEFAULT DATA
+========================================================= */
+const DEFAULTS = {
+  hero:{
+    title:"ENGINEERED\nFOR OVERDRIVE.",
+    sub:"Techlynx Overdrive helps businesses turn ideas into strong brands and online traffic into real sales — while simplifying operations through smart digitalization and automation. From branding to automation, we build systems that perform.",
+    statProjects:"50+", statSatisfaction:"98%", statAutomation:"3.5x", statSupport:"24/7"
+  },
+  about:{
+    p1:"Techlynx Overdrive is a digital growth and automation studio. We exist to help businesses turn raw ideas into brands people trust, and traffic into revenue that compounds.",
+    p2:"Where most agencies stop at design, we go further — engineering the AI automations, agents, and chatbots that run quietly in the background so your team can focus on what matters. Branding, websites, SEO, and mobile apps included, all under one roof."
+  },
+  services:[
+    {icon:"🤖", name:"AI Automation", desc:"We map your repetitive workflows and replace them with intelligent automations that save time, cut errors, and scale without adding headcount."},
+    {icon:"🧠", name:"AI Agent Development", desc:"Custom AI agents that handle real tasks — from lead qualification to internal ops — built around how your business actually runs."},
+    {icon:"💬", name:"AI Chatbot Development", desc:"Conversational chatbots for support, sales and onboarding that sound like your brand and work around the clock."},
+    {icon:"💻", name:"Web App Development", desc:"Fast, scalable web applications engineered for real usage — not just demos. Built to handle growth from day one."},
+    {icon:"🎨", name:"Branding & Visual Identity", desc:"Logos, typography, colour systems and brand guidelines that make your business instantly recognisable."},
+    {icon:"🌐", name:"High-Performance Websites", desc:"Conversion-focused websites that load fast, rank well, and turn visitors into leads and customers."},
+    {icon:"📈", name:"SEO", desc:"Technical and content SEO strategy built to compound — more visibility, more qualified traffic, more sales."},
+    {icon:"📱", name:"Mobile App Development", desc:"iOS and Android apps designed around your users, built to launch clean and scale with your business."}
+  ],
+  why:[
+    {title:"Engineered, Not Templated", desc:"Every system we build is designed around your business — never a copy-paste solution."},
+    {title:"Full-Stack Under One Roof", desc:"Branding, web, mobile and AI — one team, one strategy, zero handoff friction."},
+    {title:"Automation-First Thinking", desc:"We look for what can be automated before we look for what can be designed."},
+    {title:"Performance You Can Measure", desc:"Traffic, conversions, efficiency gains — we report on outcomes, not just deliverables."}
+  ],
+  ceo:{
+    quote:"Every business deserves systems that work as hard as they do — that's what we build.",
+    name:"Danyal Farooq",
+    role:"Founder & CEO, Techlynx Overdrive",
+    bio1:"Danyal Farooq is a seasoned businessman who has spent many years building and scaling ventures across branding, technology and digital growth. Over the course of his career, he has developed a sharp instinct for identifying where businesses lose momentum — and the systems required to fix it.",
+    bio2:"His approach to leadership is rooted in discipline and long-term thinking: build things properly, measure what matters, and never mistake activity for progress. That philosophy is the foundation Techlynx Overdrive was built on.",
+    bio3:"Under his direction, Techlynx Overdrive has grown into a full-stack studio helping businesses turn ideas into brands, and brands into revenue — powered by branding, engineering, and AI automation working in sync.",
+    tags:"Business Strategist, Brand Builder, AI & Automation Advocate, Growth-Focused Leader"
+  },
+  team:[
+    {initials:"TM", name:"Team Member One", role:"Head of Engineering", bio:"Leads web, app and AI-agent development — placeholder bio, edit from the admin panel."},
+    {initials:"TM", name:"Team Member Two", role:"Head of Design", bio:"Leads branding and visual identity work — placeholder bio, edit from the admin panel."},
+    {initials:"TM", name:"Team Member Three", role:"Head of Automation", bio:"Leads AI automation and chatbot delivery — placeholder bio, edit from the admin panel."}
+  ],
+  portfolio:[
+    {tag:"Branding", name:"Project Name One", desc:"Placeholder case study description — swap in real client results here."},
+    {tag:"Web & Apps", name:"Project Name Two", desc:"Placeholder case study description — swap in real client results here."},
+    {tag:"AI & Automation", name:"Project Name Three", desc:"Placeholder case study description — swap in real client results here."},
+    {tag:"Branding", name:"Project Name Four", desc:"Placeholder case study description — swap in real client results here."},
+    {tag:"Web & Apps", name:"Project Name Five", desc:"Placeholder case study description — swap in real client results here."},
+    {tag:"AI & Automation", name:"Project Name Six", desc:"Placeholder case study description — swap in real client results here."}
+  ],
+  testimonials:[
+    {name:"Client Name", role:"Position, Company", text:"Placeholder testimonial — replace with real client feedback from the admin panel."},
+    {name:"Client Name", role:"Position, Company", text:"Placeholder testimonial — replace with real client feedback from the admin panel."},
+    {name:"Client Name", role:"Position, Company", text:"Placeholder testimonial — replace with real client feedback from the admin panel."}
+  ],
+  process:[
+    {title:"Diagnostics", desc:"We audit your brand, systems and workflows to find exactly where growth is being lost."},
+    {title:"Blueprint", desc:"A tailored roadmap covering branding, web, and automation — mapped to your goals and timeline."},
+    {title:"Build", desc:"Our team executes — design, code, and AI systems — with regular check-ins along the way."},
+    {title:"Launch", desc:"A coordinated rollout across every channel, tested and optimised before it goes live."},
+    {title:"Overdrive", desc:"Ongoing monitoring, optimisation and support to keep performance compounding."}
+  ],
+  pricing:[
+    {name:"Starter", price:"$XXX/mo", desc:"Placeholder tier for small businesses starting their digital foundation.", features:["Brand Identity Starter Kit","1-Page High-Performance Website","Basic SEO Setup","Monthly Report"]},
+    {name:"Growth", price:"$XXX/mo", desc:"Placeholder tier for growing businesses ready to scale.", popular:true, features:["Full Brand Identity + Guidelines","Website (up to 5 pages)","1 AI Chatbot or Automation","Ongoing SEO Strategy","Bi-Weekly Strategy Calls"]},
+    {name:"Enterprise", price:"Custom", desc:"Placeholder tier for established businesses needing a full-service partner.", features:["Everything in Growth","Custom Web / Mobile App","Custom AI Agent Development","Dedicated Account Manager","Priority Support"]}
+  ],
+  faq:[
+    {q:"How long does a typical project take?", a:"Branding and websites are usually delivered within 2–4 weeks. AI automations and agents vary by scope — we'll give you a clear timeline after the discovery call."},
+    {q:"Do you work with businesses outside Pakistan?", a:"Yes — we work with clients globally and operate remotely with clear communication and project tracking throughout."},
+    {q:"What makes Techlynx Overdrive different from other agencies?", a:"We combine branding and engineering with AI automation under one roof, so the systems behind your brand actually run themselves."},
+    {q:"Can I start with just one service?", a:"Absolutely. Most clients start with a single service — branding, a website, or an automation — and expand as needs grow."},
+    {q:"Do you offer custom packages?", a:"Yes. Our pricing tiers are a starting guide — we build fully custom packages based on your goals and scale."}
+  ],
+  contact:{
+    email:"hello@techlynxoverdrive.com",
+    phone:"+92 300 0000000",
+    loc:"Lahore, Pakistan · Remote Worldwide",
+    resp:"Within 1 Business Day"
+  },
+  brand:{ logo:"", favicon:"" }
+};
+
+const STORAGE_KEY = "techlynxOverdriveData";
+const AUTH_KEY = "techlynxOverdriveAuth";
+const ADMIN_USER = "admin";
+const ADMIN_PASS = "overdrive123";
+
+function loadData(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return JSON.parse(JSON.stringify(DEFAULTS));
+    const parsed = JSON.parse(raw);
+    return Object.assign({}, JSON.parse(JSON.stringify(DEFAULTS)), parsed);
+  }catch(e){ return JSON.parse(JSON.stringify(DEFAULTS)); }
+}
+function saveData(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(DATA)); }
+let DATA = loadData();
+
+/* =========================================================
+   RENDER PUBLIC SITE
+========================================================= */
+function esc(s){ return (s||"").toString().replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+function renderSite(){
+  document.getElementById('heroTitle').innerHTML = esc(DATA.hero.title).replace(/\n/g,"<br>");
+  document.getElementById('heroSub').textContent = DATA.hero.sub;
+  document.getElementById('statProjects').textContent = DATA.hero.statProjects;
+  document.getElementById('statSatisfaction').textContent = DATA.hero.statSatisfaction;
+  document.getElementById('statAutomation').textContent = DATA.hero.statAutomation;
+  document.getElementById('statSupport').textContent = DATA.hero.statSupport;
+
+  document.getElementById('aboutP1').textContent = DATA.about.p1;
+  document.getElementById('aboutP2').textContent = DATA.about.p2;
+
+  document.getElementById('servicesGrid').innerHTML = DATA.services.map((s,i)=>`
+    <div class="service-card">
+      <div class="service-index">0${i+1}</div>
+      <div class="service-icon">${esc(s.icon)}</div>
+      <h3>${esc(s.name)}</h3>
+      <p>${esc(s.desc)}</p>
+    </div>`).join('');
+
+  document.getElementById('whyGrid').innerHTML = DATA.why.map((w,i)=>`
+    <div class="why-item">
+      <div class="why-num">0${i+1}</div>
+      <h4>${esc(w.title)}</h4>
+      <p>${esc(w.desc)}</p>
+    </div>`).join('');
+
+  document.getElementById('ceoQuote').textContent = '"'+DATA.ceo.quote+'"';
+  document.getElementById('ceoName').textContent = DATA.ceo.name;
+  document.getElementById('ceoRole').textContent = DATA.ceo.role;
+  document.getElementById('ceoBio').innerHTML = [DATA.ceo.bio1,DATA.ceo.bio2,DATA.ceo.bio3].map(p=>`<p>${esc(p)}</p>`).join('');
+  document.querySelector('.ceo-tags').innerHTML = DATA.ceo.tags.split(',').map(t=>`<span>${esc(t.trim())}</span>`).join('');
+
+  document.getElementById('teamGrid').innerHTML = DATA.team.map(t=>`
+    <div class="team-card">
+      <div class="team-avatar">${esc(t.initials)}</div>
+      <h4>${esc(t.name)}</h4>
+      <div class="team-role">${esc(t.role)}</div>
+      <p>${esc(t.bio)}</p>
+    </div>`).join('');
+
+  document.getElementById('portGrid').innerHTML = DATA.portfolio.map(p=>`
+    <div class="port-card">
+      <div class="port-media">IMAGE PLACEHOLDER</div>
+      <div class="port-body">
+        <div class="port-tag">${esc(p.tag)}</div>
+        <h4>${esc(p.name)}</h4>
+        <p>${esc(p.desc)}</p>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('testGrid').innerHTML = DATA.testimonials.map(t=>`
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <p class="quote">"${esc(t.text)}"</p>
+      <div class="test-who">
+        <div class="test-avatar">${esc((t.name||'?').slice(0,2).toUpperCase())}</div>
+        <div><div class="test-name">${esc(t.name)}</div><div class="test-role">${esc(t.role)}</div></div>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('processList').innerHTML = DATA.process.map((p,i)=>`
+    <div class="proc-row">
+      <div class="proc-num">0${i+1}</div>
+      <div><h4>${esc(p.title)}</h4><p>${esc(p.desc)}</p></div>
+    </div>`).join('');
+
+  document.getElementById('priceGrid').innerHTML = DATA.pricing.map(p=>`
+    <div class="price-card ${p.popular?'popular':''}">
+      ${p.popular?'<span class="popular-tag">Most Popular</span>':''}
+      <div class="price-name">${esc(p.name)}</div>
+      <div class="price-amt">${esc(p.price)}</div>
+      <div class="price-desc">${esc(p.desc)}</div>
+      <ul class="price-feats">${(p.features||[]).map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
+      <a href="#contact" class="btn ${p.popular?'btn-solid':''}" style="justify-content:center;">Get Started</a>
+    </div>`).join('');
+
+  document.getElementById('faqList').innerHTML = DATA.faq.map((f,i)=>`
+    <div class="faq-item">
+      <div class="faq-q" data-i="${i}"><span>${esc(f.q)}</span><span class="plus">+</span></div>
+      <div class="faq-a"><p>${esc(f.a)}</p></div>
+    </div>`).join('');
+  document.querySelectorAll('.faq-q').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const item = el.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(f=>{f.classList.remove('open');f.querySelector('.faq-a').style.maxHeight=null;});
+      if(!wasOpen){ item.classList.add('open'); const a=item.querySelector('.faq-a'); a.style.maxHeight=a.scrollHeight+'px'; }
+    });
+  });
+
+  document.getElementById('contactEmail').textContent = DATA.contact.email;
+  document.getElementById('contactPhone').textContent = DATA.contact.phone;
+  document.getElementById('contactLoc').textContent = DATA.contact.loc;
+  document.getElementById('contactResp').textContent = DATA.contact.resp;
+
+  // brand
+  if(DATA.brand.logo){ document.getElementById('logoImg').src = DATA.brand.logo; document.getElementById('logoImg').style.display='block'; document.getElementById('logoText').style.display='none'; }
+  else { document.getElementById('logoImg').style.display='none'; document.getElementById('logoText').style.display='block'; }
+  if(DATA.brand.favicon){ document.getElementById('faviconLink').href = DATA.brand.favicon; }
+
+  document.getElementById('footYear').textContent = new Date().getFullYear();
+
+  // re-observe reveals
+  document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+}
+
+const revealObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); revealObserver.unobserve(e.target); } });
+},{threshold:.12});
+
+/* nav mobile toggle */
+document.getElementById('menuToggle').addEventListener('click',()=>{
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+
+/* nav shadow on scroll */
+window.addEventListener('scroll',()=>{
+  document.getElementById('siteNav').style.boxShadow = window.scrollY>10 ? '0 8px 24px rgba(0,0,0,.35)' : 'none';
+});
+
+/* portfolio filter (visual only, placeholder categories) */
+document.addEventListener('click',(e)=>{
+  if(e.target.classList.contains('filter-btn')){
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    e.target.classList.add('active');
+    const cat = e.target.textContent.trim();
+    document.querySelectorAll('#portGrid .port-card').forEach(card=>{
+      const tag = card.querySelector('.port-tag').textContent.trim();
+      card.style.display = (cat==='All' || tag===cat) ? '' : 'none';
+    });
+  }
+});
+
+/* contact form (front-end only) */
+document.getElementById('contactForm').addEventListener('submit',(e)=>{
+  e.preventDefault();
+  document.getElementById('formMsg').style.display='block';
+  e.target.reset();
+});
+
+/* =========================================================
+   ADMIN — ROUTING
+========================================================= */
+function isAdminHash(){ return location.hash.startsWith('#admin'); }
+
+function showAdmin(){
+  document.getElementById('siteRoot').classList.add('hide');
+  document.getElementById('adminRoot').classList.add('show');
+  if(sessionStorage.getItem(AUTH_KEY)==='1'){ openDashboard(); }
+  else { document.getElementById('adminLogin').style.display='flex'; document.getElementById('adminShell').style.display='none'; }
+}
+function hideAdmin(){
+  document.getElementById('siteRoot').classList.remove('hide');
+  document.getElementById('adminRoot').classList.remove('show');
+}
+window.addEventListener('hashchange',()=>{ isAdminHash() ? showAdmin() : hideAdmin(); });
+
+document.getElementById('loginBtn').addEventListener('click',doLogin);
+document.getElementById('adminPass').addEventListener('keydown',(e)=>{ if(e.key==='Enter') doLogin(); });
+function doLogin(){
+  const u = document.getElementById('adminUser').value.trim();
+  const p = document.getElementById('adminPass').value;
+  if(u===ADMIN_USER && p===ADMIN_PASS){
+    sessionStorage.setItem(AUTH_KEY,'1');
+    openDashboard();
+  } else {
+    document.getElementById('loginErr').style.display='block';
+  }
+}
+document.getElementById('logoutBtn').addEventListener('click',()=>{
+  sessionStorage.removeItem(AUTH_KEY);
+  location.hash='';
+  document.getElementById('adminLogin').style.display='flex';
+  document.getElementById('adminShell').style.display='none';
+});
+
+function openDashboard(){
+  document.getElementById('adminLogin').style.display='none';
+  document.getElementById('adminShell').style.display='grid';
+  fillAdminForms();
+}
+
+document.getElementById('adminNav').addEventListener('click',(e)=>{
+  const btn = e.target.closest('button[data-panel]');
+  if(!btn) return;
+  document.querySelectorAll('.admin-nav button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector(`.admin-panel[data-panel="${btn.dataset.panel}"]`).classList.add('active');
+});
+
+function flashSaved(key){
+  const el = document.querySelector(`.a-saved-msg[data-msg="${key}"]`);
+  if(!el) return;
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),1800);
+}
+
+/* ---- fill simple forms ---- */
+function fillAdminForms(){
+  document.getElementById('f_heroTitle').value = DATA.hero.title;
+  document.getElementById('f_heroSub').value = DATA.hero.sub;
+  document.getElementById('f_statProjects').value = DATA.hero.statProjects;
+  document.getElementById('f_statSatisfaction').value = DATA.hero.statSatisfaction;
+  document.getElementById('f_statAutomation').value = DATA.hero.statAutomation;
+  document.getElementById('f_statSupport').value = DATA.hero.statSupport;
+
+  document.getElementById('f_aboutP1').value = DATA.about.p1;
+  document.getElementById('f_aboutP2').value = DATA.about.p2;
+
+  document.getElementById('f_ceoQuote').value = DATA.ceo.quote;
+  document.getElementById('f_ceoName').value = DATA.ceo.name;
+  document.getElementById('f_ceoRole').value = DATA.ceo.role;
+  document.getElementById('f_ceoBio1').value = DATA.ceo.bio1;
+  document.getElementById('f_ceoBio2').value = DATA.ceo.bio2;
+  document.getElementById('f_ceoBio3').value = DATA.ceo.bio3;
+  document.getElementById('f_ceoTags').value = DATA.ceo.tags;
+
+  document.getElementById('f_contactEmail').value = DATA.contact.email;
+  document.getElementById('f_contactPhone').value = DATA.contact.phone;
+  document.getElementById('f_contactLoc').value = DATA.contact.loc;
+  document.getElementById('f_contactResp').value = DATA.contact.resp;
+
+  renderOverviewStats();
+  renderServicesAdmin();
+  renderWhyAdmin();
+  renderTeamAdmin();
+  renderPortAdmin();
+  renderTestAdmin();
+  renderProcessAdmin();
+  renderPriceAdmin();
+  renderFaqAdmin();
+  renderBrandAdmin();
+}
+
+function renderOverviewStats(){
+  document.getElementById('ovProjects').textContent = DATA.hero.statProjects;
+  document.getElementById('ovSat').textContent = DATA.hero.statSatisfaction;
+  document.getElementById('ovServices').textContent = DATA.services.length;
+  document.getElementById('ovTeam').textContent = DATA.team.length;
+}
+
+/* ---- save buttons for simple sections ---- */
+document.querySelectorAll('button[data-save]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const key = btn.dataset.save;
+    if(key==='hero'){
+      DATA.hero.title = document.getElementById('f_heroTitle').value;
+      DATA.hero.sub = document.getElementById('f_heroSub').value;
+      DATA.hero.statProjects = document.getElementById('f_statProjects').value;
+      DATA.hero.statSatisfaction = document.getElementById('f_statSatisfaction').value;
+      DATA.hero.statAutomation = document.getElementById('f_statAutomation').value;
+      DATA.hero.statSupport = document.getElementById('f_statSupport').value;
+    }
+    if(key==='about'){
+      DATA.about.p1 = document.getElementById('f_aboutP1').value;
+      DATA.about.p2 = document.getElementById('f_aboutP2').value;
+    }
+    if(key==='ceo'){
+      DATA.ceo.quote = document.getElementById('f_ceoQuote').value;
+      DATA.ceo.name = document.getElementById('f_ceoName').value;
+      DATA.ceo.role = document.getElementById('f_ceoRole').value;
+      DATA.ceo.bio1 = document.getElementById('f_ceoBio1').value;
+      DATA.ceo.bio2 = document.getElementById('f_ceoBio2').value;
+      DATA.ceo.bio3 = document.getElementById('f_ceoBio3').value;
+      DATA.ceo.tags = document.getElementById('f_ceoTags').value;
+    }
+    if(key==='contact'){
+      DATA.contact.email = document.getElementById('f_contactEmail').value;
+      DATA.contact.phone = document.getElementById('f_contactPhone').value;
+      DATA.contact.loc = document.getElementById('f_contactLoc').value;
+      DATA.contact.resp = document.getElementById('f_contactResp').value;
+    }
+    if(key==='process'){
+      document.querySelectorAll('#processFieldList .a-card').forEach((card,i)=>{
+        DATA.process[i].title = card.querySelector('.pTitle').value;
+        DATA.process[i].desc = card.querySelector('.pDesc').value;
+      });
+    }
+    saveData(); renderSite(); renderOverviewStats();
+    flashSaved(key);
+  });
+});
+
+/* ---- SERVICES (repeatable) ---- */
+function renderServicesAdmin(){
+  const wrap = document.getElementById('servicesList');
+  wrap.innerHTML = DATA.services.map((s,i)=>`
+    <div class="a-card" data-i="${i}">
+      <div class="a-card-head"><strong>Service 0${i+1}</strong><button class="a-mini-btn danger" data-del="${i}">Remove</button></div>
+      <div class="a-row2">
+        <div class="a-field"><label>Icon (emoji)</label><input type="text" class="sIcon" value="${esc(s.icon)}"></div>
+        <div class="a-field"><label>Service Name</label><input type="text" class="sName" value="${esc(s.name)}"></div>
+      </div>
+      <div class="a-field"><label>Description</label><textarea class="sDesc">${esc(s.desc)}</textarea></div>
+      <button class="btn btn-solid" data-savei="${i}">Save</button>
+    </div>`).join('');
+  wrap.querySelectorAll('[data-savei]').forEach(b=>b.addEventListener('click',()=>{
+    const i = +b.dataset.savei; const card = b.closest('.a-card');
+    DATA.services[i] = {icon:card.querySelector('.sIcon').value, name:card.querySelector('.sName').value, desc:card.querySelector('.sDesc').value};
+    saveData(); renderSite(); renderOverviewStats();
+  }));
+  wrap.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>{
+    DATA.services.splice(+b.dataset.del,1); saveData(); renderSite(); renderServicesAdmin(); renderOverviewStats();
+  }));
+}
+document.getElementById('addService').addEventListener('click',()=>{
+  DATA.services.push({icon:"✨", name:"New Service", desc:"Describe this service here."});
+  saveData(); renderSite(); renderServicesAdmin(); renderOverviewStats();
+});
+
+/* ---- WHY US ---- */
+function renderWhyAdmin(){
+  const wrap = document.getElementById('whyList');
+  wrap.innerHTML = DATA.why.map((w,i)=>`
+    <div class="a-card" data-i="${i}">
+      <div class="a-card-head"><strong>Item 0${i+1}</strong></div>
+      <div class="a-field"><label>Title</label><input type="text" class="wTitle" value="${esc(w.title)}"></div>
+      <div class="a-field"><label>Description</label><textarea class="wDesc">${esc(w.desc)}</textarea></div>
+      <button class="btn btn-solid" data-savei="${i}">Save</button>
+    </div>`).join('');
+  wrap.querySelectorAll('[data-savei]').forEach(b=>b.addEventListener('click',()=>{
+    const i = +b.dataset.savei; const card = b.closest('.a-card');
+    DATA.why[i] = {title:card.querySelector('.wTitle').value, desc:card.querySelector('.wDesc').value};
+    saveData(); renderSite();
+  }));
+}
+
+/* ---- TEAM ---- */
+function renderTeamAdmin(){
+  const wrap = document.getElementById('teamList');
+  wrap.innerHTML = DATA.team.map((t,i)=>`
+    <div class="a-card" data-i="${i}">
+      <div class="a-card-head"><strong>Member 0${i+1}</strong><button class="a-mini-btn danger" data-del="${i}">Remove</button></div>
+      <div class="a-row2">
+        <div class="a-field"><label>Initials</label><input type="text" class="tInit" value="${esc(t.initials)}" maxlength="2"></div>
+        <div class="a-field"><label>Full Name</label><input type="text" class="tName" value="${esc(t.name)}"></div>
+      </div>
+      <div class="a-field"><label>Role / Title</label><input type="text" class="tRole" value="${esc(t.role)}"></div>
+      <div class="a-field"><label>Short Bio</label><textarea class="tBio">${esc(t.bio)}</textarea></div>
+      <button class="btn btn-solid" data-savei="${i}">Save</button>
+    </div>`).join('');
+  wrap.querySelectorAll('[data-savei]').forEach(b=>b.addEventListener('click',()=>{
+    const i = +b.dataset.savei; const card = b.closest('.a-card');
+    DATA.team[i] = {initials:card.querySelector('.tInit').value, name:card.querySelector('.tName').value, role:card.querySelector('.tRole').value, bio:card.querySelector('.tBio').value};
+    saveData(); renderSite(); renderOverviewStats();
+  }));
+  wrap.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>{
+    DATA.team.splice(+b.dataset.del,1); saveData(); renderSite(); renderTeamAdmin(); renderOverviewStats();
+  }));
+}
+document.getElementById('addTeam').addEventListener('click',()=>{
+  DATA.team.push({initials:"NN", name:"New Member", role:"Role / Title", bio:"Short bio placeholder."});
+  saveData(); renderSite(); renderTeamAdmin(); renderOverviewStats();
+});
+
+/* ---- PORTFOLIO ---- */
+function renderPortAdmin(){
+  const wrap = document.getElementById('portList');
+  wrap.innerHTML = DATA.portfolio.map((p,i)=>`
+    <div class="a-card" data-i="${i}">
+      <div class="a-card-head"><strong>Project 0${i+1}</strong><button class="a-mini-btn danger" data-del="${i}">Remove</button></div>
+      <div class="a-row2">
+        <div class="a-field"><label>Project Name</label><input type="text" class="pName" value="${esc(p.name)}"></div>
+        <div class="a-field"><label>Category</label>
+          <select class="pTag">
+            <option ${p.tag==='Branding'?'selected':''}>Branding</option>
+            <option ${p.tag==='Web & Apps'?'selected':''}>Web &amp; Apps</option>
+            <option ${p.tag==='AI & Automation'?'selected':''}>AI &amp; Automation</option>
+          </select>
+        </div>
+      </div>
+      <div class="a-field"><label>Description</label><textarea class="pDesc">${esc(p.desc)}</textarea></div>
+      <button class="btn btn-solid" data-savei="${i}">Save</button>
+    </div>`).join('');
+  wrap.querySelectorAll('[data-savei]').forEach(b=>b.addEventListener('click',()=>{
+    const i = +b.dataset.savei; const card = b.closest('.a-card');
+    DATA.portfolio[i] = {name:card.querySelector('.pName').value, tag:card.querySelector('.pTag').value, desc:card.querySelector('.pDesc').value};
+    saveData(); renderSite();
+  }));
+  wrap.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>{
+    DATA.portfolio.splice(+b.dataset.del,1); saveData(); renderSite(); renderPortAdmin();
+  }));
+}
+document.getElementById('addProject').addEventListener('click',()=>{
+  DATA.portfolio.push({tag:"Branding", name:"New Project", desc:"Project description placeholder."});
+  saveData(); renderSite(); renderPortAdmin();
+});
+
+/* ---- TESTIMONIALS ---- */
+function renderTestAdmin(){
+  const wrap = document.getElementById('testList');
+  wrap.innerHTML = DATA.testimonials.map((t,i)=>`
+    <div class="a-card" data-i="${i}">
+      <div class="a-card-head"><strong>Testimonial 0${i+1}</strong><button class="a-mini-btn danger" data-del="${i}">Remove</button></div>
+      <div class="a-row2">
+        <div class="a-field"><label>Client Name</label><input type="text" class="teName" value="${esc(t.name)}"></div>
+        <div class="a-field"><label>Role / Company</label><input type="text" class="teRole" value="${esc(t.role)}"></div>
+      </div>
+      <div class="a-field"><label>Testimonial Text</label><textarea class="teText">${esc(t.text)}</textarea></div>
+      <button class="btn btn-solid" data-savei="${i}">Save</button>
+    </div>`).join('');
+  wrap.querySelectorAll('[data-savei]').forEach(b=>b.addEventListener('click',()=>{
+    const i = +b.dataset.savei; const card = b.closest('.a-card');
+    DATA.testimonials[i] = {name:card.querySelector('.teName').value, role:card.querySelector('.teRole').value, text:card.querySelector('.teText').value};
+    saveData(); renderSite();
+  }));
+  wrap.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>{
+    DATA.testimonials.splice(+b.dataset.del,1); saveData(); renderSite(); renderTestAdmin();
+  }));
+}
+document.getElementById('addTest').addEventListener('click',()=>{
+  DATA.testimonials.push({name:"Client Name", role:"Position, Company", text:"Testimonial text placeholder."});
+  saveData(); renderSite(); renderTestAdmin();
+});
+
+/* ---- PROCESS ---- */
+function renderProcessAdmin(){
+  const wrap = document.getElementById('processFieldList');
+  wrap.innerHTML = DATA.process.map((p,i)=>`
+    <div class="a-card" data-i="${i}">
+      <div class="a-card-head"><strong>Step 0${i+1}</strong></div>
+      <div class="a-field"><label>Title</label><input type="text" class="pTitle" value="${esc(p.title)}"></div>
+      <div class="a-field"><label>Description</label><textarea class="pDesc">${esc(p.desc)}</textarea></div>
+    </div>`).join('');
+}
+
+/* ---- PRICING ---- */
+function renderPriceAdmin(){
+  const wrap = document.getElementById('priceList');
+  wrap.innerHTML = DATA.pricing.map((p,i)=>`
+    <div class="a-card" data-i="${i}">
+      <div class="a-card-head"><strong>Plan 0${i+1}</strong><button class="a-mini-btn danger" data-del="${i}">Remove</button></div>
+      <div class="a-row2">
+        <div class="a-field"><label>Plan Name</label><input type="text" class="plName" value="${esc(p.name)}"></div>
+        <div class="a-field"><label>Price</label><input type="text" class="plPrice" value="${esc(p.price)}"></div>
+      </div>
+      <div class="a-field"><label>Description</label><textarea class="plDesc">${esc(p.desc)}</textarea></div>
+      <div class="a-field"><label>Features (one per line)</label><textarea class="plFeat">${esc((p.features||[]).join('\n'))}</textarea></div>
+      <div class="a-field"><label><input type="checkbox" class="plPop" ${p.popular?'checked':''}> Mark as "Most Popular"</label></div>
+      <button class="btn btn-solid" data-savei="${i}">Save</button>
+    </div>`).join('');
+  wrap.querySelectorAll('[data-savei]').forEach(b=>b.addEventListener('click',()=>{
+    const i = +b.dataset.savei; const card = b.closest('.a-card');
+    DATA.pricing[i] = {
+      name:card.querySelector('.plName').value,
+      price:card.querySelector('.plPrice').value,
+      desc:card.querySelector('.plDesc').value,
+      features:card.querySelector('.plFeat').value.split('\n').filter(Boolean),
+      popular:card.querySelector('.plPop').checked
+    };
+    saveData(); renderSite();
+  }));
+  wrap.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>{
+    DATA.pricing.splice(+b.dataset.del,1); saveData(); renderSite(); renderPriceAdmin();
+  }));
+}
+document.getElementById('addPlan').addEventListener('click',()=>{
+  DATA.pricing.push({name:"New Plan", price:"$XXX/mo", desc:"Plan description.", features:["Feature one","Feature two"], popular:false});
+  saveData(); renderSite(); renderPriceAdmin();
+});
+
+/* ---- FAQ ---- */
+function renderFaqAdmin(){
+  const wrap = document.getElementById('faqEditList');
+  wrap.innerHTML = DATA.faq.map((f,i)=>`
+    <div class="a-card" data-i="${i}">
+      <div class="a-card-head"><strong>Question 0${i+1}</strong><button class="a-mini-btn danger" data-del="${i}">Remove</button></div>
+      <div class="a-field"><label>Question</label><input type="text" class="fq" value="${esc(f.q)}"></div>
+      <div class="a-field"><label>Answer</label><textarea class="fa">${esc(f.a)}</textarea></div>
+      <button class="btn btn-solid" data-savei="${i}">Save</button>
+    </div>`).join('');
+  wrap.querySelectorAll('[data-savei]').forEach(b=>b.addEventListener('click',()=>{
+    const i = +b.dataset.savei; const card = b.closest('.a-card');
+    DATA.faq[i] = {q:card.querySelector('.fq').value, a:card.querySelector('.fa').value};
+    saveData(); renderSite();
+  }));
+  wrap.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>{
+    DATA.faq.splice(+b.dataset.del,1); saveData(); renderSite(); renderFaqAdmin();
+  }));
+}
+document.getElementById('addFaq').addEventListener('click',()=>{
+  DATA.faq.push({q:"New question?", a:"Answer placeholder."});
+  saveData(); renderSite(); renderFaqAdmin();
+});
+
+/* ---- BRAND (logo / favicon) ---- */
+function renderBrandAdmin(){
+  if(DATA.brand.logo){ document.getElementById('logoPreview').src=DATA.brand.logo; document.getElementById('logoPreview').style.display='block'; document.getElementById('logoUploadText').textContent='Click to replace logo'; }
+  if(DATA.brand.favicon){ document.getElementById('favPreview').src=DATA.brand.favicon; document.getElementById('favPreview').style.display='block'; document.getElementById('favUploadText').textContent='Click to replace favicon'; }
+}
+document.getElementById('logoUpload').addEventListener('click',()=>document.getElementById('logoFile').click());
+document.getElementById('logoFile').addEventListener('change',(e)=>{
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{ DATA.brand.logo = reader.result; saveData(); renderSite(); renderBrandAdmin(); };
+  reader.readAsDataURL(file);
+});
+document.getElementById('resetLogo').addEventListener('click',()=>{
+  DATA.brand.logo=""; saveData(); renderSite(); renderBrandAdmin();
+  document.getElementById('logoPreview').style.display='none';
+  document.getElementById('logoUploadText').textContent='🖼️ Click to upload logo (transparent PNG recommended)';
+});
+document.getElementById('favUpload').addEventListener('click',()=>document.getElementById('favFile').click());
+document.getElementById('favFile').addEventListener('change',(e)=>{
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{ DATA.brand.favicon = reader.result; saveData(); renderSite(); renderBrandAdmin(); };
+  reader.readAsDataURL(file);
+});
+
+/* =========================================================
+   INIT
+========================================================= */
+renderSite();
+if(isAdminHash()) showAdmin();
+
+})();
+</script>
+</body>
+</html>
